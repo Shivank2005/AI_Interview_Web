@@ -58,14 +58,27 @@ A full-stack application designed to simulate real-world technical interviews. I
 
 ## 📁 Project Structure
 
-AI_Interview_Web
+```
+AI_Interview_Web/
 │
-├── frontend        # React + Vite application
-├── backend         # Node.js API Gateway
-├── ai-service      # Python FastAPI AI microservice
+├── frontend/        # React + Vite application
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── backend/         # Node.js API Gateway
+│   ├── controllers/
+│   ├── routes/
+│   ├── models/
+│   └── server.js
+│
+├── ai-service/      # Python FastAPI AI microservice
+│   ├── main.py
+│   ├── services/
+│   └── requirements.txt
+│
 └── README.md
-
-
+```
 ---
 ## 🚀 Getting Started
 
