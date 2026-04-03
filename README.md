@@ -56,6 +56,17 @@ A full-stack application designed to simulate real-world technical interviews. I
 
 ---
 
+## 📁 Project Structure
+
+AI_Interview_Web
+│
+├── frontend        # React + Vite application
+├── backend         # Node.js API Gateway
+├── ai-service      # Python FastAPI AI microservice
+└── README.md
+
+
+---
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -142,3 +153,12 @@ The application follows a microservices-inspired architecture to separate heavy 
 
 
 4. **Ollama**: The local LLM engine that powers the generation and evaluation logic.
+
+---
+
+## 👨‍💻 Author
+
+Shivank  
+Computer Science Student – BIT Bengaluru  
+
+GitHub: https://github.com/Shivank2005
