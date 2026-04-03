@@ -151,6 +151,7 @@ echo "VITE_API_URL=http://localhost:5000/api" > .env
 
 # Run the frontend
 npm run dev
+```
 ---
 
 ## 📐 Architecture Overview
