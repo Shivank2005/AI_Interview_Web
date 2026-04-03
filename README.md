@@ -73,8 +73,8 @@ A full-stack application designed to simulate real-world technical interviews. I
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/siddhantsaxenaofficial/ai-interviewer.git
-cd ai-interviewer
+git clone https://github.com/Shivank2005/AI_Interview_Web.git
+cd AI_Interview_Web
 
 ```
 
@@ -127,7 +127,6 @@ echo "VITE_API_URL=http://localhost:5000/api" > .env
 
 # Run the frontend
 npm run dev
-
 ---
 
 ## 📐 Architecture Overview
