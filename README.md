@@ -1,7 +1,7 @@
 ![Status](https://img.shields.io/badge/status-active-success)
 ![AI](https://img.shields.io/badge/AI-LLM-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-# 🧠 AI-Powered Technical Interview 
+# 🧠 AI-Powered Technical Interview Simulator
 
 A full-stack application designed to simulate real-world technical interviews. It allows users to practice answering conceptual and coding questions verbally and programmatically, receiving instant, AI-driven feedback on their performance.
 
