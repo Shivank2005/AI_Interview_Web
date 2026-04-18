@@ -16,10 +16,16 @@ const app = express();
 
 const server = http.createServer(app);
 
-const allowedOrigin = [
-    'http://localhost:5174',
-    'http://localhost:5173',
-]
+const allowedOrigin = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',').map((s) => s.trim()).filter(Boolean)
+    : [
+        'http://localhost:5174',
+        'http://localhost:5173',
+        'http://localhost:80',
+        'http://127.0.0.1:80',
+        'http://localhost',
+        'http://127.0.0.1',
+    ];
 
 const io = new Server(server, {
     cors: {

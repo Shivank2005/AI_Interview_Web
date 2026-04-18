@@ -1,4 +1,7 @@
 # ai-service/requirements.txt
+# CPU wheel index (keeps Docker images smaller than default CUDA PyTorch)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1
 fastapi
 uvicorn
 pydantic

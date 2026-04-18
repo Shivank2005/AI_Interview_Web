@@ -1,0 +1,75 @@
+# Fast start (no AI services): docker compose up -d --build
+# Start with AI services too:   docker compose --profile ai up -d --build
+# First AI run, pull model:     docker compose exec ollama ollama pull mistral
+# Set JWT_SECRET (and optional VITE_GOOGLE_CLIENT_ID) via environment or a .env file next to this file.
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["ai"]
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 1"]
+      interval: 10s
+      timeout: 30s
+      retries: 10
+      start_period: 15s
+
+  ai-service:
+    profiles: ["ai"]
+    build:
+      context: ./ai-service
+    restart: unless-stopped
+    environment:
+      AI_SERVICE_PORT: "8000"
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL_NAME: ${OLLAMA_MODEL_NAME:-mistral}
+    depends_on:
+      ollama:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      PORT: "5000"
+      NODE_ENV: production
+      MONGO_URI: ${MONGO_URI:-mongodb://mongo:27017/ai_interviewer}
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      AI_SERVICE_URL: http://ai-service:8000
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost,http://127.0.0.1,http://localhost:80,http://127.0.0.1:80,http://localhost:5173,http://localhost:5174}
+    depends_on:
+      - mongo
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:5000/api}
+        VITE_GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID:-}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  mongo_data:
+  ollama_data:
